@@ -7,37 +7,36 @@ namespace TestTjuvOchPolis
     internal class Personer
     {
         public string Name { get; set; }
-        public int PlatsX { get; set; }
-        public int PlatsY { get; set; }
-        public ConsoleColor ForegroundColor  { get; set; }
-        public Personer(string name,int platsX,int platsY,ConsoleColor foregroundColor)
+        public int[,] Position { get; set; }
+        public int Direction { get; set; }
+        public List<string> Inventory = new List<string>();
+        public Personer(string name, int platsX, int platsY, int direction)
         {
             Name = name;
-            PlatsX = platsX;
-            PlatsY = platsY;
-            ForegroundColor = foregroundColor;
+            Position = new int[platsX, platsY];
+            Direction = direction;
         }
-        public virtual void Move()
-        {
-
-        }
-
+        public virtual void Utskrift()
+            {
+            Console.WriteLine("Okända personer hälsar på varandra"); 
+            }
+        
     }
     class Tjuv : Personer
     {
         public string Stöldgods { get; set; }
-        public Tjuv(string name,int platsX, int platsY, ConsoleColor foregroundColor,string stöldgods):base (name,platsX,platsY,foregroundColor) 
+        public Tjuv(string name,int platsX, int platsY, int direction,string stöldgods):base (name, platsX,platsY, direction) 
         {
             Stöldgods = stöldgods;
         }
-        public override void Move()
-        {
-        }
+        //public override void Move()
+        //{
+        //}
     }
     class Polis:Personer
     {
         public string Beslagtaget { get; set; }
-        public Polis(string name, int platsX,int platsY, ConsoleColor foregroundColor,string beslagtaget) : base(name,platsX,platsY,foregroundColor)
+        public Polis(string name, int platsX,int platsY, int direction,string beslagtaget) : base(name,platsX,platsY,direction)
         {
             Beslagtaget = beslagtaget;
         }
@@ -46,7 +45,7 @@ namespace TestTjuvOchPolis
     class Medborgare:Personer
     {
         public string Tillhörigheter { get; set; }
-        public Medborgare(string name, int platsX,int platsY, ConsoleColor foregroundColor,string tillhörigheter) : base(name,platsX,platsY,foregroundColor)
+        public Medborgare(string name, int platsX,int platsY, int direction,string tillhörigheter) : base(name,platsX,platsY,direction)
         {
             Tillhörigheter = tillhörigheter;
         }

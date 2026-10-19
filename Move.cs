@@ -6,6 +6,6 @@ namespace TestTjuvOchPolis
 {
     internal class Move
     {
-     
+    
     }
 }

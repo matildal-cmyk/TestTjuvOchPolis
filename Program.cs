@@ -6,78 +6,127 @@ namespace TestTjuvOchPolis
     {
         static void Main(string[] args)
         {
-            Random Slump = new Random();
-            List<Personer> list = new List<Personer>();
-            Tjuv tjuv = new Tjuv("Lasse", Random.Shared.Next(1, 25), Random.Shared.Next(1, 98), ConsoleColor.Red, "pengar");
-            Polis polis = new Polis("Kling", Random.Shared.Next(1, 25), Random.Shared.Next(1, 98), ConsoleColor.DarkCyan, "smycken");
-            Medborgare medborgare = new Medborgare("Fru Larsson", Random.Shared.Next(1, 25), Random.Shared.Next(1, 98), ConsoleColor.DarkYellow, "halsband");
-            list.Add(tjuv);
-            list.Add(polis);
-            list.Add(medborgare);
+            List<Personer> stad = new List<Personer>();
 
-            while (true)
+            stad.Add(new Tjuv("Karlsson", Random.Shared.Next(1, 25), Random.Shared.Next(1, 98), Random.Shared.Next(1, 98), ""));
+            stad.Add(new Tjuv("Larsson", Random.Shared.Next(1, 25), Random.Shared.Next(1, 98), Random.Shared.Next(1, 98), ""));
+            stad.Add(new Tjuv("Svansson", Random.Shared.Next(1, 25), Random.Shared.Next(1, 98), Random.Shared.Next(1, 98), ""));
+            stad.Add(new Tjuv("Kalle", Random.Shared.Next(1, 25), Random.Shared.Next(1, 98), Random.Shared.Next(1,98), ""));
+           
+
+            // disable muspekarn
+            Console.CursorVisible = false;
+            //Console.Clear();
+            Console.SetWindowSize(125, 125);
+            Console.SetBufferSize(125, 125);
+
+
+            // staden --------------------------------------------
+            Console.Write("=CITY");
+            for (int tak = 0; tak <= 95; tak++)
             {
-                Console.Clear();
-                Console.Write("=CITY");
-                for (int tak = 0; tak <= 95; tak++)
+                Console.Write("=");
+            }
+            Console.WriteLine();
+
+            //Rita upp "staden"
+            string[,] city = new string[25, 98];//100-2 för x
+            for (int i = 0; i <= city.GetLength(0); i++)
+            {
+                Console.Write("x");
+                for (int j = 0; j <= city.GetLength(1); j++)
                 {
-                    Console.Write("=");
-                }
-                Console.WriteLine();
-                //Rita upp "staden"
-                string[,] city = new string[25, 98];//100-2 för x
-                for (int x = 0; x <= city.GetLength(0); x++)
-                {
-                    Console.Write("x");
-                    for (int y = 0; y <= city.GetLength(1); y++)
-                    {
-
-
-
-                        Console.SetCursorPosition(x, y);
-                        Console.Write("X");
-
-                        x += Slump.Next(-1, 2);
-                        y += Slump.Next(-1, 2);
-
-                        x = Math.Clamp(x, 0, 99);
-                        y = Math.Clamp(y, 0, 24);
-
-                        Thread.Sleep(150);
-                    }
-
-
-
-
-
-
-
                     Console.Write(" ");
                 }
                 Console.Write("x");
                 Console.WriteLine();
-
-                Console.Write("=STATUS");
-                for (int g = 0; g <= 93; g++)
-                {
-                    Console.Write("=");
-                }
-                Console.WriteLine();
-                //Här ska det stå info om hur många som finns kvar 
-                Console.WriteLine("Antal poliser: ");
-                Console.WriteLine("Antal tjuvar: ");
-                Console.WriteLine("Antal medborgare: ");
-
-                Console.Write("=NEWSFEED");
-                for (int i = 0; i <= 91; i++) //100 -bokstäverna
-                {
-                    Console.Write("=");
-                }
-                Console.WriteLine();
-                //Här ska det stå info om vilka som möts
-                Console.WriteLine("Vilka som möts och säger hej eller tar från varandra");
             }
-        }
+            Console.Write("=STATUS");
+            for (int g = 0; g <= 93; g++)
+            {
+                Console.Write("=");
+            }
+            Console.WriteLine();
+
+
+            //int x = Random.Shared.Next(0, 70);
+            //int y = Random.Shared.Next(0, 15);
+
+            // staden --------------------------------------------
+
+
+            while (true)
+            {
+
+
+
+                foreach (Personer person in stad)
+
+                {
+                    int[,] old = ((Tjuv)person).Position;
+                    
+                    {
+
+
+                        if (person is Tjuv)
+
+                            for (int i = 0; i < ((Tjuv)person).Position.GetLength(0); i++)
+                            {
+                                for (int j = 0; j < ((Tjuv)person).Position.GetLength(1); i++)
+                                {
+                                    int x = [i];
+                                    int y = ((Tjuv)person).Position.GetLength(i);
+                                    Console.Write(Position[i]);
+                                    
+                                    //Console.SetCursorPosition([i][j]);
+                                    ////Console.Write(person.ShortName);
+                                    //Console.ForegroundColor = ConsoleColor.Red;
+                                    //Console.Write("T");
+                                    //Console.ResetColor();
+
+                                    //delay mellan rörelse
+                                    Thread.Sleep(100);
+                                }
+                            }
+                        //    ((Tjuv)person).Position += Random.Shared.Next(-1, 2);
+                        //person.PlatsY += Random.Shared.Next(-1, 2);
+
+
+
+
+
+
+
+                        //// gå igenom väggen, "teleporteras" till andra sidan
+                        if (person.PlatsX < 1) person.PlatsX = 96;
+                        //// ai tips om teleportera tillbaka
+                        else if (person.PlatsX > 96) person.PlatsX = 1;
+
+                        //// teleport
+                        if (person.PlatsY < 1) person.PlatsY = 25;
+                        //// ai tips om teleportera tillbaka
+                        else if (person.PlatsY > 25) person.PlatsY = 1;
+
+
+                        // byter ut gamla X positionen med blank text, kan skriva . eller , för se vart X har gått
+                        Console.SetCursorPosition(oldX, oldY);
+                        Console.Write(" ");
+
+                        // skriver X som flyttas runt
+
+
+                        //Console.SetCursorPosition(x, y);
+                        //Console.Write("X");
+                        Console.SetCursorPosition(person.PlatsX, person.PlatsY);
+                        //Console.Write(person.ShortName);
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write("T");
+                        Console.ResetColor();
+
+                        //delay mellan rörelse
+                        Thread.Sleep(100);
+                    }
+                }
     }
 }
 
