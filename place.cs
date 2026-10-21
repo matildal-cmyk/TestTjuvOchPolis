@@ -4,18 +4,18 @@ using System.Text;
 
 namespace TestTjuvOchPolis
 {
-    internal class place
-    {
-        public int MyProperty { get; set; }
+    //internal class place
+    //{
+    //    public int MyProperty { get; set; }
 
-    }
-    class city : place;
-    {
+    //}
+    //class city : place;
+    //{
 
-    }
+    //}
     
    
-}
+
 
 
 
